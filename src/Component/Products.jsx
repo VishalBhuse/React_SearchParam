@@ -26,7 +26,7 @@ const Products = () => {
       page,
       q:text
     })
-    fetch(`http://localhost:8080/products?_page=${page}&_limit=1`)
+    fetch(`http://localhost:8080/products?q=${text}&_page=${page}&_limit=1`)
       .then((res) => res.json())
       .then((res) => {
         setprod(res);
@@ -39,10 +39,13 @@ const Products = () => {
       width={'50%'}
       margin={'auto'}
       >
-      <Input placeholder='small size' size='sm' 
+
+      <Input
+      placeholder='enter keyword here like shirt, pant, shirt' size='sm' 
       value={text}
       onChange={(e)=>settext(e.target.value)}
       />
+    
       </Box>
       <Box
         height={"480px"}
@@ -94,13 +97,13 @@ const Products = () => {
           <Stack spacing={4} direction="row" align="center">
             <Button
               colorScheme="teal"
-              disabled={page == 1}
+              disabled={page === 1}
               onClick={() => setpage(1)}
             >
               Prev
             </Button>
             <Button
-              disabled={page == 4}
+              disabled={page === 4}
               colorScheme="teal"
               onClick={() => setpage(page=>page+1)}
             >
